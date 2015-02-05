@@ -3,21 +3,36 @@
   <head>
     <title>Chat App</title>
     <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css'/>
-    <link rel='stylesheet' href='bower_components/fontawesome/css/font-awesome.css'/>
+    <link rel='stylesheet' href='bower_components/font-awesome/css/font-awesome.css'/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <link rel='stylesheet' href='style.css'/>
   </head>
   <body>
+    <!--STORED USER GREETING  -->
+    <div class="login"></div>
 
+    <!--NEW USER LOGIN FORM-->
     <form id='enterUserForm' action="">
       <input type="text" name='enterUserInput'>
-      <button type='submit' class='btn btn-primary'>Save</button>
+      <button type='submit' class='btn btn-secondary'>Login</button>
     </form>
+
+    <!-- NEW MESSAGE FORM-->
+    <form id='enterMessageForm' action="">
+      <input type="text" name='enterMessageInput'>
+      <button type='submit' class='btn btn-primary'>Send</button>
+    </form>
+
+    <!--LIST OF MESSAGES-->
+    <section class="messageListContainer"></section>
+
+    <!--LIST OF LOGGED IN USERS-->
+    <section class="userListContainer"></section>
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src='bower_components/bootstrap/dist/js/bootstrap.js'></script>
-    <script src="template.js"></script>
+    <script src="templates.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
