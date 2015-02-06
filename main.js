@@ -11,7 +11,8 @@ var chatApp = {
   },
 
   userProfile: {
-    profile: JSON.parse( localStorage.getItem( 'profile' ) )
+    profile: JSON.parse( localStorage.getItem( 'profile' ) ),
+    messages: []
   },
 
   init: function () {
@@ -41,7 +42,7 @@ var chatApp = {
       var userInfo = {
         user:{
           name:$(this).find('input[name="enterUserInput"]').val(),
-          messages: []
+          // messages: []
         }
       };
 
@@ -71,7 +72,7 @@ var chatApp = {
 
       var userId = $('.userCard').data('userid');
       var userProfile = JSON.parse( localStorage.getItem( 'profile' ) );
-      var userMessages = userProfile.user["messages"]
+      var userMessages = chatApp.userProfile.profile.user["messages"]
       var msg = $(this).find('input[name="enterMessageInput"]').val()
 
       var updatedUserInfo = {
@@ -81,7 +82,7 @@ var chatApp = {
         }
       };
 
-      updatedUserInfo.user["messages"].push(msg);
+      userMessages.push(msg);
 
       chatApp.addMessage(userId, updatedUserInfo);
 
