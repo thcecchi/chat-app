@@ -10,6 +10,10 @@ var chatApp = {
     url: "http://tiy-fee-rest.herokuapp.com/collections/closetalkers"
   },
 
+  userProfile: {
+    profile: JSON.parse( localStorage.getItem( 'profile' ) )
+  },
+
   init: function () {
     chatApp.initStyle();
     chatApp.initEvents();
@@ -67,15 +71,19 @@ var chatApp = {
 
       var userId = $('.userCard').data('userid');
       var userProfile = JSON.parse( localStorage.getItem( 'profile' ) );
+      var userMessages = userProfile.user["messages"]
+      var msg = $(this).find('input[name="enterMessageInput"]').val()
 
-      var userMessageInfo = {
+      var updatedUserInfo = {
         user:{
           name: userProfile.user.name,
-          messages: $(this).find('input[name="enterMessageInput"]').val()
+          messages: userMessages
         }
       };
 
-      chatApp.createMessage(userId ,userMessageInfo);
+      updatedUserInfo.user["messages"].push(msg);
+
+      chatApp.addMessage(userId, updatedUserInfo);
 
     });
 
@@ -172,7 +180,7 @@ var chatApp = {
     });
   },
 
-  createMessage: function (id, msg) {
+  addMessage: function (id, msg) {
     $.ajax({
       url: chatApp.config.url + '/' + id,
       data: msg,
