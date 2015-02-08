@@ -1,0 +1,44 @@
+.invis{
+  display:none;
+}
+#logOutBtn{
+  position:absolute;
+  right:10px;
+  top:10px;
+}
+#refreshChatsBtn{
+  position:absolute;
+  right:97px;
+  top:10px;
+}
+#loginWrapper,#mainWrapper{
+  margin:auto;
+  width:50%;
+  text-align:center;
+}
+h1{
+  font-family:'Open Sans';
+  padding-top:50px;
+}
+input{
+  height:34px;
+}
+#chatWindow{
+border:1px solid black;
+height:300px;
+margin-bottom:1em;
+text-align:left;
+padding-left:0.5em;
+overflow: auto;
+}
+#messageInput{
+  width:80%;
+}
+.btn-success{
+  width:18%;
+}
+.userIdentifier{
+  font-weight:bold;
+  color:red;
+  margin-right:1em;
+}

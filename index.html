@@ -8,27 +8,25 @@
     <link rel='stylesheet' href='style.css'/>
   </head>
   <body>
-    <!--STORED USER GREETING  -->
-    <div class="login"></div>
-
-    <!--NEW USER LOGIN FORM-->
-    <form id='enterUserForm' action="">
-      <input type="text" name='enterUserInput'>
-      <button type='submit' class='btn btn-secondary'>Login</button>
-    </form>
-
-    <!-- NEW MESSAGE FORM-->
-    <form id='enterMessageForm' action="">
-      <input type="text" name='enterMessageInput'>
-      <button type='submit' class='btn btn-primary'>Send</button>
-    </form>
-
-    <!--LIST OF MESSAGES-->
-    <section class="messageListContainer"></section>
-
-    <!--LIST OF LOGGED IN USERS-->
-    <section class="userListContainer"></section>
-
+    <div id='loginWrapper'>
+      <h1>Close Talkers</h1>
+      <form id='enterUsernameForm' action="">
+        <input type="text" name='enterUsernameInput' placeholder='Enter Username'>
+        <button type='submit' class='btn btn-primary'>Log In</button>
+      </form>
+    </div>
+    <div id="mainWrapper" class='invis'>
+      <button class='btn btn-danger' id='logOutBtn'>Log Out</button>
+      <!-- <button class='btn btn-warning' id='refreshChatsBtn'>Refresh Chats</button> -->
+      <h1>Close Talkers</h1>
+      <div id="chatWindow"></div>
+      <form id='enterTextForm' action="">
+        <input type="text" name='enterTextInput' placeholder='Type Message Here' id='messageInput'>
+        <button type='submit' class='btn btn-success'>Send</button>
+      </form>
+      <h1>Current Users</h1>
+      <div id="userList"></div>
+    </div>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src='bower_components/bootstrap/dist/js/bootstrap.js'></script>
