@@ -65,6 +65,88 @@ var chatApp = {
       e.preventDefault();
       chatApp.renderChats();
     });
+// DELETE MESSAGE
+    $('#chatWindow').on('click', 'i', function (e) {
+      e.preventDefault();
+      $(this).parent().remove();
+
+      var msgId = $(this).parent().data('msgid').toString();
+
+      // var serverId = $(this).('.messageCard').attr("rel");
+
+      //  Pull down array of all messages
+      $.ajax({
+        url:chatApp.config.url,
+        type:'GET',
+        success: function(retrievedUsers){
+          var masterMsgArray = [];
+          _.each(retrievedUsers, function (eachUser) {
+
+            _.each(eachUser.messages, function (usersMsgObj) {
+              masterMsgArray.push(usersMsgObj);
+            });
+          });
+          console.log('SUCCESS: renderChats');
+          console.log(masterMsgArray)
+
+          //find index of object containing msgId
+          indexes = $.map(masterMsgArray, function(obj, index) {
+            if(obj.timeStamp == msgId) {
+              return index;
+            }
+          })
+
+          firstIndex = indexes[0]
+          console.log(firstIndex)
+
+          // splice object from array
+          var updatedMsgArray = masterMsgArray.splice(firstIndex, 1);
+
+          console.log(masterMsgArray)
+
+          //Now send new array to server
+          serverId = $('.userCard[rel='+localStorage.localUser+']').data('userid');
+
+        },
+        error: function(error){
+          console.log('WARNING: renderChats');
+        }
+      });
+
+      // chatApp.deleteMessage(serverId, editedMessages);
+
+    });
+
+
+    $('#mainWrapper').on('click', '.btn-warning', function (e) {
+        e.preventDefault();
+        var userAlias = localStorage.localUser
+        console.log(userAlias)
+        $("h3:contains('" + userAlias + "')").replaceWith('<input type="text" class="updateUserName" name="updateUserName"></input>');
+        $('.btn-warning').text('submit')
+        var userId = $('.userCard').data('userid');
+        return false;
+
+      });
+
+      $('#mainWrapper').on('dblclick', '.btn-warning', function (e) {
+        e.preventDefault();
+        var userId = $('.userCard').data('userid');
+        var editedUserName = {
+          name: $('.updateUserName').val()
+        }
+
+        var newName = $('.updateUserName').val()
+        $(".userCard").find('input').replaceWith('<h3>' + newName + '</h3>');
+        $('.btn-warning').text('Update')
+
+        localStorage.localUser = newName;
+
+        chatApp.updateUserName(userId, editedUserName);
+        return false;
+
+      });
+
   },
   preventDuplicateUsername: function (passed) {
     $.ajax({
@@ -124,7 +206,7 @@ var chatApp = {
     $('#loginWrapper').addClass('invis');
     $('#mainWrapper').removeClass('invis');
     //auto update chats
-    setInterval(chatApp.renderChats, 200);
+    setInterval(chatApp.renderChats, 5000);
   },
   logOutUser: function () {
     delete localStorage.localUser;
@@ -201,7 +283,37 @@ var chatApp = {
         console.log('WARNING: renderChats');
       }
     });
-  }
+  },
+
+  deleteMessage: function (id, content) {
+    $.ajax({
+        url: chatApp.config.url + '/' + id,
+        data: content,
+        type: 'PUT',
+        success: function (data) {
+          console.log(data);
+          chatApp.renderChats();
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+  },
+
+  updateUserName: function (id, name) {
+        $.ajax({
+          url: chatApp.config.url + '/' + id,
+          data: name,
+          type: 'PUT',
+          success: function (data) {
+            console.log(data);
+            chatApp.renderChats();
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+    }
 }
 
 $(document).ready(function () {

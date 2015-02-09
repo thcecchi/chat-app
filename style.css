@@ -37,6 +37,10 @@ input {
 .btn-success {
   width: 18%; }
 
+.btn-warning {
+  width: 18%;
+  margin-bottom: 5%;}
+
 .userIdentifier {
   font-weight: bold;
   color: red;
