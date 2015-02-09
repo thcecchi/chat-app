@@ -72,7 +72,7 @@ var chatApp = {
 
       var msgId = $(this).parent().data('msgid').toString();
 
-      // var serverId = $(this).('.messageCard').attr("rel");
+      // If localStorage.localUser
 
       //  Pull down array of all messages
       $.ajax({
@@ -81,7 +81,6 @@ var chatApp = {
         success: function(retrievedUsers){
           var masterMsgArray = [];
           _.each(retrievedUsers, function (eachUser) {
-
             _.each(eachUser.messages, function (usersMsgObj) {
               masterMsgArray.push(usersMsgObj);
             });
@@ -89,7 +88,7 @@ var chatApp = {
           console.log('SUCCESS: renderChats');
           console.log(masterMsgArray)
 
-          //find index of object containing msgId
+       //find index of object containing msgId
           indexes = $.map(masterMsgArray, function(obj, index) {
             if(obj.timeStamp == msgId) {
               return index;
@@ -100,12 +99,42 @@ var chatApp = {
           console.log(firstIndex)
 
           // splice object from array
-          var updatedMsgArray = masterMsgArray.splice(firstIndex, 1);
+          var updatedMasterMsgArray = masterMsgArray.splice(firstIndex, 1);
+
+          // define new spliced masterMsgArray
 
           console.log(masterMsgArray)
 
-          //Now send new array to server
+          // push objs where name == localStorage.localUser to new array
+          var updatedMsgArray = []
+          var newName = localStorage.localUser
+          $.map(masterMsgArray, function(obj, index) {
+            if(obj.name == newName) {
+              updatedMsgArray.push(obj)
+            }
+          })
+
+          console.log(updatedMsgArray)
+
+          //Now send new user Object to server
           serverId = $('.userCard[rel='+localStorage.localUser+']').data('userid');
+
+          var updatedUser = {
+            name: localStorage.localUser,
+            messages: updatedMsgArray
+          }
+
+          $.ajax({
+             url: chatApp.config.url + '/' + serverId,
+             data: updatedUser,
+             type: 'PUT',
+             success: function () {
+               console.log('SUCCESS: sendChat uploaded message to server (_id: '+serverId+')');
+             },
+             error: function () {
+               console.log('WARNING: sendChat failed to upload message to server');
+             }
+           });
 
         },
         error: function(error){
@@ -285,20 +314,20 @@ var chatApp = {
     });
   },
 
-  deleteMessage: function (id, content) {
-    $.ajax({
-        url: chatApp.config.url + '/' + id,
-        data: content,
-        type: 'PUT',
-        success: function (data) {
-          console.log(data);
-          chatApp.renderChats();
-        },
-        error: function (err) {
-          console.log(err);
-        }
-      });
-  },
+  // deleteMessage: function (id, content) {
+  //   $.ajax({
+  //       url: chatApp.config.url + '/' + id,
+  //       data: content,
+  //       type: 'PUT',
+  //       success: function (data) {
+  //         console.log(data);
+  //         chatApp.renderChats();
+  //       },
+  //       error: function (err) {
+  //         console.log(err);
+  //       }
+  //     });
+  // },
 
   updateUserName: function (id, name) {
         $.ajax({
