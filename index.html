@@ -3,19 +3,20 @@
   <head>
     <title>Chat App</title>
     <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css'/>
+    <link rel='stylesheet' href='bower_components/animate.css'/>
     <link rel='stylesheet' href='bower_components/font-awesome/css/font-awesome.css'/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <link rel='stylesheet' href='style.css'/>
   </head>
   <body>
-    <div id='loginWrapper'>
+    <div id='loginWrapper' class="animated bounceInUp">
       <h1>Close Talkers</h1>
       <form id='enterUsernameForm' action="">
         <input type="text" name='enterUsernameInput' placeholder='Enter Username'>
         <button type='submit' class='btn btn-primary'>Log In</button>
       </form>
     </div>
-    <div id="mainWrapper" class='invis'>
+    <div id="mainWrapper" class='invis animated fadeIn'>
       <button class='btn btn-danger' id='logOutBtn'>Log Out</button>
       <!-- <button class='btn btn-warning' id='refreshChatsBtn'>Refresh Chats</button> -->
       <h1>Close Talkers</h1>
@@ -29,6 +30,7 @@
       <button class='btn btn-warning' id='updateBtn'>update.</button>
     </div>
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src='bower_components/bootstrap/dist/js/bootstrap.js'></script>
     <script src="templates.js"></script>

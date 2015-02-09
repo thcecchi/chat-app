@@ -10,6 +10,6 @@ templates.message = [
 '<div class="messageCard" rel="<%= name %>" data-msgid="<%= timeStamp %>">',
 '<span class = "userIdentifier"><%= name %>:</span>',
 '<span class = "userMessage"><%= content %></span>',
-'<i class="fa fa-times"></i>',
+'<i class="fa fa-times" rel="<%= name %>"></i>',
 '</div>'
 ].join("")

@@ -36,6 +36,7 @@ var chatApp = {
   initEvents: function () {
     $('#enterUsernameForm').on('submit', function (e) {
       e.preventDefault();
+      $('#loginWrapper').addClass('animated bounceOutUp')
       var userInput = {
         name: $(this).find('input[name="enterUsernameInput"]').val(),
         messages: ['']
