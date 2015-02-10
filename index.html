@@ -9,26 +9,45 @@
     <link rel='stylesheet' href='style.css'/>
   </head>
   <body>
+    <video autoplay loop poster="polina.jpg" id="bgvid">
+      <source src="seinfeld.webm" type="video/webm">
+      <source src="seinfeld.mp4" type="video/mp4">
+      </video>
+
     <div id='loginWrapper' class="animated bounceInUp">
-      <h1>Close Talkers</h1>
+      <h1 class="loginTitle">The Close-Talker</h1>
       <form id='enterUsernameForm' action="">
-        <input type="text" name='enterUsernameInput' placeholder='Enter Username'>
+        <input id="loginInput" type="text" name='enterUsernameInput' placeholder='Enter Username'>
         <button type='submit' class='btn btn-primary'>Log In</button>
       </form>
     </div>
-    <div id="mainWrapper" class='invis animated fadeIn'>
-      <button class='btn btn-danger' id='logOutBtn'>Log Out</button>
-      <!-- <button class='btn btn-warning' id='refreshChatsBtn'>Refresh Chats</button> -->
-      <h1>Close Talkers</h1>
-      <div id="chatWindow"></div>
-      <form id='enterTextForm' action="">
+
+  <div id="topBar" class="invis animated fadeIn fluid-container">
+    <div class="row">
+      <h1 class="siteTitle col-md-11">The Close-Talker</h1>
+      <button class='btn btn-danger col-md-1' id='logOutBtn'>Log Out</button>
+    <!-- <button class='btn btn-warning' id='refreshChatsBtn'>Refresh Chats</button> -->
+    </div>
+  </div>
+
+    <div id="mainWrapper" class='invis container-fluid animated fadeIn'>
+      <div class="mainContent row">
+          <div id="chatWindow" class="col-md-9"></div>
+          <div class="col-md-3">
+            <h4>Current Users</h4>
+            <div id="userList"></div>
+            <button class='btn btn-warning' id='updateBtn'>update.</button>
+          </div>
+      </div>
+
+      <div class="row">
+      <form class="col-md-12" id='enterTextForm' action="">
         <input type="text" name='enterTextInput' placeholder='Type Message Here' id='messageInput'>
         <button type='submit' class='btn btn-success'>Send</button>
       </form>
-      <h1>Current Users</h1>
-      <div id="userList"></div>
-      <button class='btn btn-warning' id='updateBtn'>update.</button>
     </div>
+    </div>
+
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>

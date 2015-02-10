@@ -1,10 +1,13 @@
 .invis {
   display: none; }
 
+.fluid-container {
+  width: 100%; }
+
 #logOutBtn {
   position: absolute;
   right: 10px;
-  top: 10px; }
+  top: 17px; }
 
 #refreshChatsBtn {
   position: absolute;
@@ -16,30 +19,90 @@
   width: 50%;
   text-align: center; }
 
-h1 {
-  font-family: 'Open Sans';
-  padding-top: 50px; }
+#loginWrapper {
+  margin-top: 15%;
+  background-color: black;
+  opacity: .8;
+  border-radius: 10%;
+  width: 25%;
+  height: 200px; }
 
-input {
-  height: 34px; }
+.loginTitle {
+  font-family: 'Helvetica';
+  font-size: 2.5em;
+  color: white;
+  font-weight: bold;
+  padding-top: 8%; }
+
+#loginInput {
+  width: 100%;
+  border: none;
+  font-size: 2em;
+  text-align: center;
+  height: 50px;
+  outline-width: 0;
+  color: lightblue;
+  display: block;
+  background-color: black;
+  opacity: .8; }
+
+video#bgvid {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  background: url(polina.jpg) no-repeat;
+  background-size: cover; }
+
+#topBar {
+  box-shadow: 0px 3px 5px #888888;
+  position: fixed;
+  width: 100%; }
+
+.siteTitle {
+  font-family: 'Helvetica';
+  margin-left: 25%;
+  font-weight: bold; }
+
+.mainContent {
+  padding-top: 20%; }
 
 #chatWindow {
-  border: 1px solid black;
   height: 300px;
+  display: inline-block;
   margin-bottom: 1em;
   text-align: left;
   padding-left: 0.5em;
-  overflow: auto; }
+  overflow: auto;
+  border: none; }
+  #chatWindow .userIdentifier {
+    font-size: 1.5em;
+    padding-bottom: 1%;
+    padding-right: 2%; }
+  #chatWindow .fa-times {
+    padding-left: 10%;
+    color: lightgray; }
 
 #messageInput {
-  width: 80%; }
+  width: 80%;
+  border: none;
+  font-size: 2.25em;
+  height: 50px;
+  outline-width: 0; }
 
 .btn-success {
   width: 18%; }
 
+fa-times {
+  color: gray;
+  opacity: .5; }
+
 .btn-warning {
-  width: 18%;
-  margin-bottom: 5%;}
+  margin-bottom: 5%; }
 
 .userIdentifier {
   font-weight: bold;

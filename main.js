@@ -175,7 +175,9 @@ var chatApp = {
     });
     //hiding login screen/showing main chat page
     $('#loginWrapper').addClass('invis');
+    $('video').addClass('invis');
     $('#mainWrapper').removeClass('invis');
+    $('#topBar').removeClass('invis');
     //auto update chats
     setInterval(chatApp.renderChats, 200);
   },
