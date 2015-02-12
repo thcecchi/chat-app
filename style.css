@@ -61,7 +61,9 @@ video#bgvid {
 #topBar {
   box-shadow: 0px 3px 5px #888888;
   position: fixed;
-  width: 100%; }
+  width: 100%;
+  z-index: 999;
+  background: white; }
 
 .siteTitle {
   font-family: 'Helvetica';
@@ -83,9 +85,11 @@ video#bgvid {
     font-size: 1.5em;
     padding-bottom: 1%;
     padding-right: 2%; }
-  #chatWindow .fa-times {
+  #chatWindow .deleteMsgIcon {
     padding-left: 10%;
-    color: lightgray; }
+    color: lightgray;
+    display: inline-block;
+    display: none; }
 
 #messageInput {
   width: 80%;
@@ -97,9 +101,13 @@ video#bgvid {
 .btn-success {
   width: 18%; }
 
-fa-times {
-  color: gray;
-  opacity: .5; }
+.userCard {
+  display: block; }
+  .userCard .userName, .userCard .deleteUserIcon {
+    display: inline-block;
+    width: 50%; }
+  .userCard .deleteUserIcon {
+    display: none; }
 
 .btn-warning {
   margin-bottom: 5%; }

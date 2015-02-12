@@ -32,13 +32,23 @@ var chatApp = {
   },
   initStyle: function () {
 
+//ICONS ONLY DISPLAY NEXT TO LOCAL USER NAME
+
+if ($('.userCard').attr('rel') == localStorage.localUser) {
+  $(".deleteUserIcon").show()
+}
+
+else {
+  $(".deleteUserIcon").hide()
+}
+
   },
   initEvents: function () {
     $('#enterUsernameForm').on('submit', function (e) {
       e.preventDefault();
       $('#loginWrapper').addClass('animated bounceOutUp')
       var userInput = {
-        name: $(this).find('input[name="enterUsernameInput"]').val(),
+        name: $(this).find('input[name="enterUsernameInput"]').val().split(' ').join('_'),
         messages: ['']
       };
       chatApp.preventDuplicateUsername(userInput);//hand off to store or match userInput on server
@@ -67,7 +77,7 @@ var chatApp = {
       chatApp.renderChats();
     });
 // DELETE MESSAGE
-    $('#chatWindow').on('click', 'i', function (e) {
+    $('#chatWindow').on('click', '.deleteMsgIcon', function (e) {
       e.preventDefault();
 
       var msgId = $(this).parent().data('msgid').toString();
@@ -116,6 +126,15 @@ var chatApp = {
         chatApp.updateUserName(userId, editedUserName);
         return false;
 
+      });
+
+//DELETE USER
+    $('#mainWrapper').on('click', '.deleteUserIcon', function (e) {
+        e.preventDefault();
+        var userId = $(this).parent('.userCard').data('userid');
+        $(this).parent('.userCard').remove();
+
+        chatApp.deleteUser(userId)
       });
 
   },
@@ -167,6 +186,17 @@ var chatApp = {
           markup += compiled(eachUser);
         });
         $('#userList').html(markup);
+
+        $('.userCard').each(function( index ) {
+          if ($(this).attr('rel') == localStorage.localUser) {
+            $(".deleteUserIcon").show()
+          }
+
+          else {
+            $(".deleteUserIcon").hide()
+          }
+        });
+
         console.log('SUCCESS: loadMain rendered usernames from server');
       },
       error: function () {
@@ -246,7 +276,19 @@ var chatApp = {
         _.each(masterMsgArray, function (usersMsgObj) {
           markup += compiled(usersMsgObj);
         });
+
         $('#chatWindow').html(markup);
+
+        $('.userMessageCard').each(function( index ) {
+          if ($(this).attr('rel') == localStorage.localUser) {
+            $(".deleteMsgIcon[index]").show()
+          }
+
+          else {
+            $(".deleteMsgIcon").hide()
+          }
+        });
+
         $("#chatWindow").animate({
           scrollTop: $("#chatWindow").height()
         }, 0);
@@ -343,6 +385,22 @@ var chatApp = {
             console.log(err);
           }
         });
+    },
+
+    deleteUser: function (id) {
+      $.ajax({
+        url: chatApp.config.url + '/' + id,
+        type: 'DELETE',
+        success: function (data) {
+          console.log(data);
+          delete localStorage.localUser;
+          location.reload();
+          chatApp.renderChats();
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
     }
 }
 

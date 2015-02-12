@@ -69,6 +69,9 @@ video#bgvid {
   box-shadow: 0px 3px 5px #888888;
   position: fixed;
   width: 100%;
+  z-index: 999;
+  background: white;
+
 }
 
 .siteTitle{
@@ -97,9 +100,10 @@ border: none;
     padding-right: 2%;
   }
 
-  .fa-times {
+  .deleteMsgIcon {
     padding-left: 10%;
     color: lightgray;
+    display: none;
   }
 }
 
@@ -114,9 +118,17 @@ border: none;
   width:18%;
 }
 
-fa-times {
-  color: gray;
-  opacity: .5;
+.userCard {
+  display: block;
+
+  .userName, .deleteUserIcon {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .deleteUserIcon {
+    display: none;
+  }
 }
 
 .btn-warning {
